@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shopping_app/categories.dart';
 import 'package:shopping_app/home.dart';
+import 'package:shopping_app/products.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Home(),
         '/categories': (context) => const Categories(),
+        '/products': (context) => const Products(),
       },
     );
   }
