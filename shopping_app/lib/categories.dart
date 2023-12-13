@@ -8,13 +8,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Categories'),
         backgroundColor: Colors.blue.shade400,
       ),
       drawer: const CustomNavigationBar(),
-      /* body: SafeArea(
-        child: Column(),
-      ), */
     );
   }
 }
