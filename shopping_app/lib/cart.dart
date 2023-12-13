@@ -3,76 +3,50 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/apiRequests/dummyJson/endpoints.dart';
 import 'package:shopping_app/bloc/addToCartBloc/addToCartBloc.dart';
 import 'package:shopping_app/bloc/addToCartBloc/addToCartEvent.dart';
+import 'package:shopping_app/bloc/addToCartBloc/addToCartState.dart';
 import 'package:shopping_app/currencyFormat.dart';
 import 'package:shopping_app/models/product.dart';
 import 'package:shopping_app/models/productList.dart';
 import 'package:shopping_app/navigationbar.dart';
 
-class ProductsScreenParams {
-  String? category;
-
-  ProductsScreenParams({this.category});
-}
-
-class Products extends StatefulWidget {
-  const Products({super.key});
+class Cart extends StatefulWidget {
+  const Cart({super.key});
 
   @override
   _ProductsState createState() => _ProductsState();
 }
 
 class _ProductsState extends State {
-  Future<ProductListModel>? products;
-  ProductsScreenParams? args;
   @override
   Widget build(BuildContext context) {
-    args = ModalRoute.of(context)!.settings.arguments as ProductsScreenParams;
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: const Text('Cart'),
         backgroundColor: Colors.blue.shade400,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/cart');
-            },
-            icon: const Icon(Icons.shopping_basket_outlined),
-          )
-        ],
       ),
       drawer: const CustomNavigationBar(),
-      body: FutureBuilder(
-        future: products,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return loadingView();
-            case ConnectionState.active:
-              break;
-            case ConnectionState.done:
-              {
-                if (snapshot.hasData) {
-                  if (snapshot.data.productList.length > 0) {
-                    return Container(
-                      child: Center(
-                        child: ListView.builder(
-                          padding: EdgeInsets.all(24),
-                          itemCount: snapshot.data.productList.length,
-                          itemBuilder: (context, index) {
-                            return generateColum(
-                                snapshot.data.productList[index]);
-                          },
-                        ),
-                      ),
-                    );
-                  }
-                }
-              }
-            case ConnectionState.none:
+      body: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          if (state.cartItems.isEmpty) {
+            return const Center(
+              child: Text('Cart empty'),
+            );
           }
-          throw "Error";
+
+          return Center(
+            child: ListView.builder(
+              padding: EdgeInsets.all(24),
+              itemCount: state.cartItems.length,
+              itemBuilder: (context, index) {
+                return generateColum(state.cartItems[index]);
+              },
+            ),
+          );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.check),
       ),
     );
   }
@@ -82,9 +56,9 @@ class _ProductsState extends State {
     isConnected().then((internet) {
       if (internet) {
         setState(() {
-          if (args?.category != null) {
+          /* if (args?.category != null) {
             products = getProductsByCategory(args?.category ?? "");
-          }
+          } */
         });
       }
     });
@@ -93,7 +67,7 @@ class _ProductsState extends State {
 
   Widget generateColum(Product product) => Card(
         child: ListTile(
-          leading: Image.network(product.images![0]),
+          leading: Image.network(product.images[0]),
           title: Text(
             product.title,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -102,7 +76,7 @@ class _ProductsState extends State {
               style: const TextStyle(fontWeight: FontWeight.w600)),
           trailing: ElevatedButton(
             child: Icon(
-              Icons.shopping_cart,
+              Icons.remove_shopping_cart_outlined,
             ),
             onPressed: () {
               final cartBloc = context.read<CartBloc>();
