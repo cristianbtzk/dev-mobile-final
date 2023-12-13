@@ -51,6 +51,7 @@ Widget buildHeader(BuildContext context) => Material(
         ),
       ),
     );
+
 Widget buildMenuItems(BuildContext context) => Container(
       padding: const EdgeInsets.all(12),
       child: Wrap(
@@ -68,7 +69,10 @@ Widget buildMenuItems(BuildContext context) => Container(
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Categories'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/categories');
+            },
           ),
         ],
       ),

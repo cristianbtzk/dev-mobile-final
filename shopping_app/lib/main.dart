@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:shopping_app/categories.dart';
 import 'package:shopping_app/home.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       /* themeMode: themeProvider.getTheme, */
       routes: {
         '/': (context) => const Home(),
+        '/categories': (context) => const Categories(),
       },
     );
   }
