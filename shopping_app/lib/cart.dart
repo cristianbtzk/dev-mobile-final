@@ -33,13 +33,29 @@ class _ProductsState extends State {
             );
           }
 
+          double total = state.cartItems.fold(
+              {"total": 0.0},
+              (preMap, map) =>
+                  {"total": preMap["total"]! + map.price})["total"]!;
+
           return Center(
-            child: ListView.builder(
-              padding: EdgeInsets.all(24),
-              itemCount: state.cartItems.length,
-              itemBuilder: (context, index) {
-                return generateColum(state.cartItems[index]);
-              },
+            child: Column(
+              children: [
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(24),
+                  itemCount: state.cartItems.length,
+                  itemBuilder: (context, index) {
+                    return generateColum(state.cartItems[index]);
+                  },
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  padding: const EdgeInsets.only(right: 26),
+                  child: Text('Total: ${currencyFormat(total)}'),
+                )
+              ],
             ),
           );
         },
