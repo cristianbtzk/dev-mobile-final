@@ -12,9 +12,26 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.blue.shade400,
       ),
       drawer: const CustomNavigationBar(),
-      /* body: SafeArea(
-        child: Column(),
-      ), */
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 250),
+                  child: const Image(
+                    image: AssetImage('assets/home_page.png'),
+                  ),
+                ),
+                const Text('Shopping app', style: TextStyle(fontSize: 24)),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

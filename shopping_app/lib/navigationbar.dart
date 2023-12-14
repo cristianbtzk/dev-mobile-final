@@ -62,7 +62,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/exercises');
+              Navigator.pushNamed(context, '/');
             },
           ),
           const Divider(color: Colors.black),

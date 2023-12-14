@@ -10,7 +10,7 @@ import 'package:shopping_app/products.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.remove();
+  //FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
