@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/theme.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   const CustomNavigationBar({super.key});
@@ -91,6 +93,26 @@ Widget buildMenuItems(BuildContext context) => Container(
               Navigator.pop(context);
               Navigator.pushNamed(context, '/orders');
             },
+          ),
+          const Divider(color: Colors.black),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue.shade300,
+            ),
+            onPressed: () {
+              ThemeProvider themeProvider = Provider.of<ThemeProvider>(
+                context,
+                listen: false,
+              );
+
+              themeProvider.swapTheme();
+            },
+            child: const Text(
+              style: TextStyle(
+                fontSize: 20,
+              ),
+              'Change theme',
+            ),
           ),
         ],
       ),
