@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
 
   if (await exists('./orders.json'))
     orders = JSON.parse(await fs.readFile('./orders.json'));
-  console.log(orders)
+  
   orders.push(req.body)
   
   await fs.writeFile('./orders.json', JSON.stringify(orders))
