@@ -83,6 +83,15 @@ Widget buildMenuItems(BuildContext context) => Container(
               Navigator.pushNamed(context, '/cart');
             },
           ),
+          const Divider(color: Colors.black),
+          ListTile(
+            leading: const Icon(Icons.shop),
+            title: const Text('My orders'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/orders');
+            },
+          ),
         ],
       ),
     );

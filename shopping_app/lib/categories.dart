@@ -3,6 +3,7 @@ import 'package:shopping_app/apiRequests/dummyJson/endpoints.dart';
 import 'package:shopping_app/models/product.dart';
 import 'package:shopping_app/navigationbar.dart';
 import 'package:shopping_app/products.dart';
+import 'package:shopping_app/utils/capitalize.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -41,7 +42,7 @@ class _CategoriesState extends State {
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(
-                              snapshot.data[index],
+                              capitalize(snapshot.data[index]),
                               style: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600),
                             ),

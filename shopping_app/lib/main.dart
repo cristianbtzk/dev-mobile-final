@@ -5,6 +5,7 @@ import 'package:shopping_app/bloc/addToCartBloc/addToCartBloc.dart';
 import 'package:shopping_app/cart.dart';
 import 'package:shopping_app/categories.dart';
 import 'package:shopping_app/home.dart';
+import 'package:shopping_app/orders.dart';
 import 'package:shopping_app/products.dart';
 
 void main() {
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const Home(),
           '/cart': (context) => const Cart(),
           '/categories': (context) => const Categories(),
-          '/orders': (context) => const Categories(),
+          '/orders': (context) => const Orders(),
           '/products': (context) => const Products(),
         },
       ),
