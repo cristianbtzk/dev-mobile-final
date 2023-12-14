@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/apiRequests/dummyJson/endpoints.dart';
 import 'package:shopping_app/bloc/addToCartBloc/addToCartBloc.dart';
 import 'package:shopping_app/bloc/addToCartBloc/addToCartEvent.dart';
-import 'package:shopping_app/bloc/addToCartBloc/addToCartState.dart';
+import 'package:shopping_app/bloc/addToCartBloc/cartState.dart';
 import 'package:shopping_app/currencyFormat.dart';
 import 'package:shopping_app/models/product.dart';
 import 'package:shopping_app/models/productList.dart';
@@ -75,15 +75,18 @@ class _ProductsState extends State {
           subtitle: Text(currencyFormat(product.price),
               style: const TextStyle(fontWeight: FontWeight.w600)),
           trailing: ElevatedButton(
-            child: Icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            child: const Icon(
               Icons.remove_shopping_cart_outlined,
             ),
             onPressed: () {
-              final cartBloc = context.read<CartBloc>();
-              cartBloc.add(AddToCart(product));
+              final cartBloc = BlocProvider.of<CartBloc>(context);
+              cartBloc.add(RemoveFromCart(product));
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Item added to cart'),
+                  content: Text('Item removed from cart'),
                   duration: Duration(seconds: 2),
                 ),
               );
