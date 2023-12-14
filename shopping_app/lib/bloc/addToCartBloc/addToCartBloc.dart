@@ -19,6 +19,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           .where((item) => item.id != event.product.id)
           .toList();
       emit(CartState(updatedCart));
+    } else if (event is ClearCart) {
+      emit(CartState([]));
     }
   }
 }

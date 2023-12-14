@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const Home(),
           '/cart': (context) => const Cart(),
           '/categories': (context) => const Categories(),
+          '/orders': (context) => const Categories(),
           '/products': (context) => const Products(),
         },
       ),

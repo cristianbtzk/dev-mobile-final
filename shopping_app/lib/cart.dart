@@ -45,7 +45,28 @@ class _ProductsState extends State {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          final cartBloc = BlocProvider.of<CartBloc>(context);
+          createOrder(cartBloc.state.cartItems).then((value) {
+            if (value) {
+              cartBloc.add(ClearCart());
+              Navigator.pushNamed(context, '/orders');
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Order created'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+              return;
+            }
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Error while creating order'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          });
+        },
         child: const Icon(Icons.check),
       ),
     );
